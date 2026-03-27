@@ -20,4 +20,16 @@ class Post:
     title: str
     content: str
     author_id: int
+    status: str = "draft"          # 새 필드: 게시 상태 (draft/published/deleted)
+    view_count: int = 0            # 새 필드: 조회수
+    created_at: datetime = field(default_factory=datetime.now)
+    updated_at: datetime = field(default_factory=datetime.now)
+
+
+@dataclass
+class Comment:
+    id: int
+    post_id: int
+    author_id: int
+    content: str
     created_at: datetime = field(default_factory=datetime.now)
