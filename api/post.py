@@ -3,13 +3,16 @@
 from db.connection import execute_query
 
 
-def get_posts(page: int = 1, size: int = 10) -> list[dict]:
+def get_posts(page: int = 1, size: int = 10, status: str = "published") -> list[dict]:
     offset = (page - 1) * size
     rows = execute_query(
-        "SELECT id, title, author_id, created_at FROM posts LIMIT %s OFFSET %s",
-        (size, offset),
+        "SELECT id, title, author_id, status, view_count, created_at FROM posts WHERE status=%s LIMIT %s OFFSET %s",
+        (status, size, offset),
     )
-    return [{"id": r[0], "title": r[1], "author_id": r[2], "created_at": r[3]} for r in rows]
+    return [
+        {"id": r[0], "title": r[1], "author_id": r[2], "status": r[3], "view_count": r[4], "created_at": r[5]}
+        for r in rows
+    ]
 
 
 def create_post(title: str, content: str, author_id: int) -> dict:
