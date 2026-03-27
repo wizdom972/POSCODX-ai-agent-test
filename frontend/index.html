@@ -11,9 +11,19 @@
     <nav>
       <a href="/login">로그인</a>
       <a href="/posts">게시판</a>
+      <a href="/profile">마이페이지</a>
     </nav>
   </header>
-  <main id="app"></main>
+  <main id="app">
+    <section id="login-form" class="card">
+      <h2>로그인</h2>
+      <input type="text" id="username" placeholder="아이디" />
+      <input type="password" id="password" placeholder="비밀번호" />
+      <button onclick="handleLogin()">로그인</button>
+      <p id="login-error" class="error"></p>
+      <a href="/signup">회원가입</a>
+    </section>
+  </main>
   <script src="app.js"></script>
 </body>
 </html>
