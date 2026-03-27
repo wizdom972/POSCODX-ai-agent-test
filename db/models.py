@@ -15,13 +15,21 @@ class User:
 
 
 @dataclass
+class Tag:
+    id: int
+    name: str       # 태그명 (예: "python", "공지사항")
+    slug: str       # URL 슬러그 (예: "python", "notice")
+
+
+@dataclass
 class Post:
     id: int
     title: str
     content: str
     author_id: int
-    status: str = "draft"          # 새 필드: 게시 상태 (draft/published/deleted)
-    view_count: int = 0            # 새 필드: 조회수
+    status: str = "draft"
+    view_count: int = 0
+    tags: list = field(default_factory=list)   # Tag ID 목록
     created_at: datetime = field(default_factory=datetime.now)
     updated_at: datetime = field(default_factory=datetime.now)
 
@@ -32,4 +40,5 @@ class Comment:
     post_id: int
     author_id: int
     content: str
+    parent_id: int | None = None    # 대댓글 지원
     created_at: datetime = field(default_factory=datetime.now)
