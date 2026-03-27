@@ -13,5 +13,6 @@ DATABASE = {
 
 JWT = {
     "algorithm": "HS256",
-    "expire_minutes": 60,
+    "expire_minutes": 30,    # 60분 → 30분으로 단축 (보안 정책 변경)
+    "refresh_expire_days": 7,
 }
